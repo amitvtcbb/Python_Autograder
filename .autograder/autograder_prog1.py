@@ -16,14 +16,14 @@ def generate_program1_feedback(expected_output, student_output):
     return feedback
 
 # Read the input number from the input.txt file
-with open('input/input.txt', 'r') as file:
+with open('Input_Ouput/input1.txt', 'r') as file:
     input_number = int(file.readline().strip())
 
 # Calculate the expected sum of digits for the input number
 expected_output = calculate_sum_of_digits(input_number)
 
 # Read the student's output from the output.txt file
-with open('output/output.txt', 'r') as file:
+with open('Input_Ouput/output1.txt', 'r') as file:
     student_output = int(file.readline().strip())
 
 # Generate feedback for program 1 based on the expected and student's output
