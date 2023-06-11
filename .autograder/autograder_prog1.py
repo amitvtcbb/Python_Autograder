@@ -1,30 +1,33 @@
-def autograder():
-    # Read input from input.txt file
-    with open('Input_Output/input1.txt', 'r') as file:
-        number = int(file.read().strip())
+def calculate_sum_of_digits(num):
+    # Calculate the sum of digits in the number
+    sum_of_digits = sum(int(digit) for digit in str(num))
+    return sum_of_digits
 
-    # Execute the student's solution script
-    # Assuming the student's solution script is named "student_solution.py"
-    exec(open("student_solution.py").read())
-
-    # Calculate the sum of digits using the student's solution
-    student_output = calculate_digit_sum(number)
-
-    # Compare the student's output with the expected output from output.txt file
-    with open('Input_Output/output1.txt', 'r') as file:
-        expected_output = int(file.read().strip())
-
-    # Compare the student's output with the expected output
-    if student_output == expected_output:
-        score = 100
+# Function to generate feedback for program 1
+def generate_program1_feedback(expected_output, student_output):
+    if expected_output == student_output:
+        grade = 100
+        feedback = "Congratulations! Your solution for program 1 is correct."
     else:
-        score = 0
+        grade = 0
+        feedback = "Oops! Your solution for program 1 is incorrect. Please check your code."
 
-    # Return the score
-    return score
+    feedback += f"\nGrade: {grade}%"
+    return feedback
 
-# Call the autograder function
-score = autograder()
+# Read the input number from the input.txt file
+with open('input/input.txt', 'r') as file:
+    input_number = int(file.readline().strip())
 
-# Print the score
-print("Score:", score)
+# Calculate the expected sum of digits for the input number
+expected_output = calculate_sum_of_digits(input_number)
+
+# Read the student's output from the output.txt file
+with open('output/output.txt', 'r') as file:
+    student_output = int(file.readline().strip())
+
+# Generate feedback for program 1 based on the expected and student's output
+feedback = generate_program1_feedback(expected_output, student_output)
+
+# Print the feedback
+print(feedback)
