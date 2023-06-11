@@ -1,6 +1,6 @@
 def autograder():
     # Read input from input.txt file
-    with open('input_output/input.txt', 'r') as file:
+    with open('input_output/input1.txt', 'r') as file:
         number = int(file.read().strip())
 
     # Execute the student's solution script
@@ -11,7 +11,7 @@ def autograder():
     student_output = calculate_digit_sum(number)
 
     # Compare the student's output with the expected output from output.txt file
-    with open('input_output/output.txt', 'r') as file:
+    with open('input_output/output1.txt', 'r') as file:
         expected_output = int(file.read().strip())
 
     # Compare the student's output with the expected output
