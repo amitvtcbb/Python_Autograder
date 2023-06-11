@@ -13,20 +13,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Run Autograder
-        run: python .autograder/autograder.py
+      - name: Run autograder for Program 1
+        run: python .autograder/autograder_prog1.py
 
-      - name: Generate Feedback
-        run: python .autograder/generate_feedback.py
-
-      - name: Display Feedback
+      - name: Run autograder for Program 2
+        run: python .autograder/autograder_prog2.py
+     - name: Update README.md with feedback and scores
         run: |
-          for program in program1 program2; do
-            student_solution_files=$(ls $program)
-            for student_solution_file in $student_solution_files; do
-              feedback=$(python feedback.py $program $student_solution_file)
-              echo "Feedback for $program/$student_solution_file:"
-              echo "$feedback"
-              echo
-            done
-          done
+            echo "Program 1 Feedback: $(cat .autograder/input_output/feedback1.txt)" >> README.md
+            echo "Program 1 Score: $(cat .autograder/input_output/score1.txt)" >> README.md
+            echo "" >> README.md
+            echo "Program 2 Feedback: $(cat .autograder/input_output/feedback2.txt)" >> README.md
+            echo "Program 2 Score: $(cat .autograder/input_output/score2.txt)" >> README.md
