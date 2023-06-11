@@ -1,37 +1,36 @@
-def is_prime(num):
-    # Check if the number is prime
-    if num < 2:
+# autograder_prog2.py
+
+def is_prime(number):
+    if number <= 1:
         return False
-    for i in range(2, int(num ** 0.5) + 1):
-        if num % i == 0:
+    for i in range(2, int(number ** 0.5) + 1):
+        if number % i == 0:
             return False
     return True
 
-# Function to generate feedback for program 2
-def generate_program2_feedback(expected_output, student_output):
-    if expected_output == student_output:
-        grade = 100
-        feedback = "Congratulations! Your solution for program 2 is correct."
-    else:
-        grade = 0
-        feedback = "Oops! Your solution for program 2 is incorrect. Please check your code."
+# Read input from input2.txt
+with open('.autograder/input_output/input2.txt', 'r') as input_file:
+    number = int(input_file.readline())
 
-    feedback += f"\nGrade: {grade}%"
-    return feedback
+# Check if the student's number is prime
+student_output = is_prime(number)
 
-# Read the input number from the input.txt file
-with open('Input_Ouput/input2.txt', 'r') as file:
-    input_number = int(file.readline().strip())
+# Read expected output from output2.txt
+with open('.autograder/input_output/output2.txt', 'r') as output_file:
+    expected_output = bool(int(output_file.readline()))
 
-# Calculate the expected output for the input number
-expected_output = is_prime(input_number)
+# Compare student's output with expected output
+if student_output == expected_output:
+    feedback = "Program 2: Outputs match"
+    score = 10
+else:
+    feedback = "Program 2: Outputs differ"
+    score = 0
 
-# Read the student's output from the output.txt file
-with open('Input_Ouput/output2.txt', 'r') as file:
-    student_output = bool(file.readline().strip())
+# Write feedback to feedback2.txt
+with open('.autograder/input_output/feedback2.txt', 'w') as feedback_file:
+    feedback_file.write(feedback)
 
-# Generate feedback for program 2 based on the expected and student's output
-feedback = generate_program2_feedback(expected_output, student_output)
-
-# Print the feedback
-print(feedback)
+# Write score to score2.txt
+with open('.autograder/input_output/score2.txt', 'w') as score_file:
+    score_file.write(str(score))
