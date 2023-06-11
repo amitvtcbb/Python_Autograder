@@ -1,33 +1,32 @@
-def calculate_sum_of_digits(num):
-    # Calculate the sum of digits in the number
-    sum_of_digits = sum(int(digit) for digit in str(num))
-    return sum_of_digits
+# autograder_prog1.py
 
-# Function to generate feedback for program 1
-def generate_program1_feedback(expected_output, student_output):
-    if expected_output == student_output:
-        grade = 100
-        feedback = "Congratulations! Your solution for program 1 is correct."
-    else:
-        grade = 0
-        feedback = "Oops! Your solution for program 1 is incorrect. Please check your code."
+def calculate_digit_sum(number):
+    digit_sum = sum(int(digit) for digit in str(number))
+    return digit_sum
 
-    feedback += f"\nGrade: {grade}%"
-    return feedback
+# Read input from input1.txt
+with open('.autograder/input_output/input1.txt', 'r') as input_file:
+    number = int(input_file.readline())
 
-# Read the input number from the input.txt file
-with open('Input_Ouput/input1.txt', 'r') as file:
-    input_number = int(file.readline().strip())
+# Calculate the student's output
+student_output = calculate_digit_sum(number)
 
-# Calculate the expected sum of digits for the input number
-expected_output = calculate_sum_of_digits(input_number)
+# Read expected output from output1.txt
+with open('.autograder/input_output/output1.txt', 'r') as output_file:
+    expected_output = int(output_file.readline())
 
-# Read the student's output from the output.txt file
-with open('Input_Ouput/output1.txt', 'r') as file:
-    student_output = int(file.readline().strip())
+# Compare student's output with expected output
+if student_output == expected_output:
+    feedback = "Program 1: Outputs match"
+    score = 10
+else:
+    feedback = "Program 1: Outputs differ"
+    score = 0
 
-# Generate feedback for program 1 based on the expected and student's output
-feedback = generate_program1_feedback(expected_output, student_output)
+# Write feedback and score to feedback1.txt
+with open('.autograder/input_output/feedback1.txt', 'w') as feedback_file:
+    feedback_file.write(feedback)
 
-# Print the feedback
-print(feedback)
+# Write score to score1.txt
+with open('.autograder/input_output/score1.txt', 'w') as score_file:
+    score_file.write(str(score))
