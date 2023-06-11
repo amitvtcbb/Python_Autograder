@@ -1,0 +1,32 @@
+name: Autograding
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  autograding:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run Autograder
+        run: python .autograder/autograder.py
+
+      - name: Generate Feedback
+        run: python .autograder/generate_feedback.py
+
+      - name: Display Feedback
+        run: |
+          for program in program1 program2; do
+            student_solution_files=$(ls $program)
+            for student_solution_file in $student_solution_files; do
+              feedback=$(python feedback.py $program $student_solution_file)
+              echo "Feedback for $program/$student_solution_file:"
+              echo "$feedback"
+              echo
+            done
+          done
